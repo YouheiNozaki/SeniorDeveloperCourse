@@ -6,11 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearchField, requestRobots } from '../action';
 import './App.css';
 
-const App = () => {
+import Header from '../components/header'
+
+const App = ({ store }) => {
   const [searchResults, setSearchResults] = useState([]);
 
-  const text = useSelector(state => state.searchRobots.setSearchField);
-  const robots = useSelector(state => state.requestRobots.robots);
+  const text = useSelector(state => state.searchRobots.searchField);
+  const robotsUsers = useSelector(state => state.getRobotsReducer.users);
   const dispatch = useDispatch();
 
   const onSearchChange = e => {
@@ -22,22 +24,22 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    let filteredRobots = robots.filter(robots => {
-      return robots.name.toLowerCase().includes(text.toLowerCase());
+    let filteredRobots = robotsUsers.filter(robots => {
+      return (robots.name.toLowerCase().includes(text.toLowerCase()))
     });
     setSearchResults(filteredRobots);
-  }, [robots, text]);
+  }, [text, robotsUsers]);
 
   const newRobot = searchResults;
 
   return (
     <div className="tc">
       <Scroll>
-        <h1 className="f2">RoboFriends</h1>
+        <Header />
         <SearchBox SearchChange={onSearchChange} />
       </Scroll>
       {text === '' ? (
-        <CardList robots={robots} />
+        <CardList robots={robotsUsers} />
       ) : (
         <CardList robots={newRobot} />
       )}

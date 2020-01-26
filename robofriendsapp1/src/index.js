@@ -6,11 +6,11 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App';
-import { searchRobots, requestRobots } from './reducers';
+import { searchRobots, getRobotsReducer } from './reducers';
 import 'tachyons';
 
 const logger = createLogger();
-const rootReducer = combineReducers({ searchRobots, requestRobots });
+const rootReducer = combineReducers({ searchRobots, getRobotsReducer });
 const store = createStore(
   rootReducer,
   applyMiddleware(thunkMiddleware, logger),

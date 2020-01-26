@@ -9,10 +9,10 @@ const intialStateSearch = {
   searchField: '',
 };
 
-export const searchRobots = (state = intialStateSearch, action = {}) => {
-  switch (action.type) {
+export const searchRobots = (state = intialStateSearch, {type, payload}) => {
+  switch (type) {
     case CHANGE_SEARCH_FIELD:
-      return Object.assign({}, state, { searchField: action.payload });
+      return Object.assign({}, state, { searchField: payload });
     default:
       return state;
   }
@@ -20,17 +20,17 @@ export const searchRobots = (state = intialStateSearch, action = {}) => {
 
 const intialStateRobots = {
   isPending: false,
-  robots: [],
+  users: [],
   error: '',
 };
 
-export const requestRobots = (state = intialStateRobots, action = {}) => {
+export const getRobotsReducer = (state = intialStateRobots, action) => {
   switch (action.type) {
     case REQUEST_ROBOTS_PENDING:
       return Object.assign({}, state, { isPending: true });
     case REQUEST_ROBOTS_SUCCESS:
       return Object.assign({}, state, {
-        robots: action.payload,
+        users: action.payload,
         isPending: false,
       });
     case REQUEST_ROBOTS_FAILED:
