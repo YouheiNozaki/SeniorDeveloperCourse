@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../logo.svg';
 
-const Page3 = ({ onRouteChange }) => (
+export const Page3 = ({ onRouteChange }) => (
   <div className="App">
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
